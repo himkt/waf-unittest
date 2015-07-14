@@ -1,15 +1,12 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-import os, subprocess, sys
+import os, subprocess, sys, base64
 
 TMPL_NAME = 'unittestt.py'
 DEST_NAME = 'unittest_gtest.py'
 TARBALL_NAME = 'fused-gtest.tar.bz2'
 GTEST_DIR = 'gtest-1.7.0/fused-src/gtest'
-
-C1 = '#XXX'.encode()
-C2 = '#YYY'.encode()
 
 try:
   if subprocess.call(['tar', 'cjf', TARBALL_NAME, GTEST_DIR]):
@@ -24,7 +21,7 @@ try:
   t.close()
 
   scr += '#==>\n#'.encode()
-  scr += tbz.replace('\n'.encode(), C1).replace('\r'.encode(), C2)
+  scr += base64.b64encode(tbz)
   scr += '\n#<==\n'.encode()
 
   t = open(DEST_NAME, 'wb')

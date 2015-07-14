@@ -34,12 +34,10 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-import os, subprocess, sys
+import os, subprocess, sys, base64
 from waflib.TaskGen import before, after, feature
 from waflib import Options, Task, Utils, Logs, Errors
 
-C1 = '#XXX'.encode()
-C2 = '#YYY'.encode()
 UNPACK_DIR = '.unittest-gtest'
 GTEST_DIR = 'gtest-1.7.0/fused-src'
 
@@ -69,7 +67,7 @@ def unpack_gtest(conf):
         Logs.error('corrupt archive')
       break
 
-  txt = txt[1:-1].replace(C1, '\n'.encode()).replace(C2, '\r'.encode())
+  txt = base64.b64decode(txt[1:-1])
 
   cleanup()
 
