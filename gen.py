@@ -6,7 +6,7 @@ import os, subprocess, sys, base64
 TMPL_NAME = 'unittestt.py'
 DEST_NAME = 'unittest_gtest.py'
 TARBALL_NAME = 'fused-gtest.tar.bz2'
-GTEST_DIR = 'gtest-1.7.0/fused-src/gtest'
+GTEST_DIR = 'gtest-1.8.1/fused-src/gtest'
 
 try:
   if subprocess.call(['tar', 'cjf', TARBALL_NAME, GTEST_DIR]):
